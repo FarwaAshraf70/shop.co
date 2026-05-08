@@ -13,7 +13,7 @@ const Navbar = () => {
     <>
 
 
-    <nav className='flex justify-center items-center gap-10'>
+    <nav className='flex justify-center items-center gap-10 mt-24px'>
    
       <img src={logo} alt='' className='max-w-40 h-5'/>
   
@@ -27,12 +27,12 @@ const Navbar = () => {
       </ul>
     </div>
     <div className='relative bg-[#F0F0F0] py-3 pl-8.5  rounded-[62px] max-w-144.25 gap-3'>
-      <input type='text' placeholder='Search for products...' className=' placeholder:font-normal text-[16px] leading-[100%]' />
+      <input type='text' placeholder='Search for products...' className=' placeholder:font-normal placeholder:text-[16px] placeholder:leading-[100%] ' />
       <CiSearch  className='absolute bottom-3.75 left-1.25 bg-black/400'/>
     </div>
     <div className='flex gap-3'>
-      <img src={cart} alt='' className=''/>
-      <img src={signIn} alt='' className=''/>
+      <img src={cart} alt='' className='w-8'/>
+      <img src={signIn} alt='' className='w-8'/>
     </div>
     </nav>
  
