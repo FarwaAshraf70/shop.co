@@ -8,7 +8,7 @@ const Brands = () => {
   return (
     <>
 <div className='bg-[#000000]'>
-<div className='flex bg-[#000000] gap-[106px] px-[30px] py-[42px]'>
+<div className='flex bg-[#000000] gap-[106px] px-[30px] py-[42px] justify-center items-center'>
   <img src={versace} alt=''/>
   <img src={zara} alt=''/> 
   <img src={gucci} alt=''/>

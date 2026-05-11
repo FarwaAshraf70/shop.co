@@ -115,7 +115,7 @@ const Arrival = () => {
               <img
                 src={item.image}
                 alt=''
-                className='rounded-[20px]  mx-auto max-w-[295px] h-[298px] object-cover'
+                className='rounded-[20px]  mx-auto max-w-[295px] h-[298px] '
               />
 
               <p className='font-[700] text-[20px] leading-[100%]  mt-[16px] '>
@@ -156,7 +156,7 @@ const Arrival = () => {
               <img
                 src={item.image}
                 alt=''
-                className='rounded-[20px]  mx-auto max-w-[295px] h-[298px] object-cover font-[satoshi]'
+                className='rounded-[20px]  mx-auto max-w-[295px] h-[298px] '
               />
 
               <p className='font-bold text-[20px] leading-[100%] mt-4'>
