@@ -12,9 +12,9 @@ const Navbar = () => {
   return (
     <>
 
-
-    <nav className='flex justify-center items-center gap-10 mt-24px'>
-   
+<div className=''>
+    <nav className='flex justify-center items-center gap-10 mt-[24px] mx-[100px]'>
+  
       <img src={logo} alt='' className='max-w-40 h-5'/>
   
     <div className=''>
@@ -33,9 +33,10 @@ const Navbar = () => {
     <div className='flex gap-3'>
       <img src={cart} alt='' className='w-8'/>
       <img src={signIn} alt='' className='w-8'/>
-    </div>
+      </div>
+
     </nav>
- 
+ </div>
     
     </>
   )

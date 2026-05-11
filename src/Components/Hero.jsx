@@ -9,7 +9,7 @@ const Hero = () => {
         <p className='font-bold text-[64px] leading-[64px] tracking-[0%] '>FIND CLOTHES THAT MATCHES YOUR STYLE</p>
         <p className='font-normal text-[16px] leading-[22px] max-w-[545px]'>Browse through our diverse range of meticulously crafted garments, designed to bring out your individuality and cater to your sense of style.</p>
         <button className='bg-[#000000] rounded-[62px] text-[#FFFFFF] py-4 px-[54px] max-w-[210px]'>Shop Now</button>
-        <div className='grid grid-cols-3 '>
+        <div className='grid grid-cols-3 justify-items-center '>
           <div className=''>
               <p className='font-bold text-[40px] leading-[100%] '>200+</p>
                <p className='text-bg-black/60 font-normal text-[16px] leading-[22px]'>International Brands </p>
