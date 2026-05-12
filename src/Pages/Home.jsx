@@ -6,6 +6,8 @@ import Dressing from '../Components/Dressing'
 import CustomersReview from '../Components/CustomersReview'
 import LatestOffer from '../Components/\LatestOffer'
 import Footer from '../Components/\Footer'
+import { Link } from 'react-router-dom'
+import Links from '../Components/Links'
 
 const Home = () => {
   return (
@@ -17,6 +19,8 @@ const Home = () => {
    <CustomersReview/>
    <LatestOffer/>
    <Footer/>
+   <Links/>
+   {/* <AddToCart/> */}
     </>
   )
 }

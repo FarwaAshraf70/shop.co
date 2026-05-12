@@ -140,8 +140,6 @@ const Arrival = () => {
 
       </div>
 
-
-
       <h1 className='flex justify-center items-center font-bold text-3xl mt-[80px] '>
         TOP SELLING
       </h1>
@@ -152,7 +150,7 @@ const Arrival = () => {
           tipselling.map((item) => (
 
           <div key={item.id} className=''>
-<div className='flex flex-col justify-center items-center'>
+           <div className='flex flex-col justify-center items-center'>
               <img
                 src={item.image}
                 alt=''
