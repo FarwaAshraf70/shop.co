@@ -16,10 +16,9 @@ const Home = () => {
     <Brands />
     <Arrival/>
     <Dressing/>
-   <CustomersReview/>
-   <LatestOffer/>
-   <Footer/>
-   <Links/>
+    <CustomersReview/>
+    <LatestOffer/>
+    <Links/>
    {/* <AddToCart/> */}
     </>
   )

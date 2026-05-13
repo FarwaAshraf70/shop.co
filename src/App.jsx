@@ -5,6 +5,7 @@ import Navbar from "./Components/Navbar";
 import ShopHere from "./Pages/ShopHere";
 import Footer from "./Components/Footer";
 import LatestOffer from "./Components/LatestOffer";
+import Cart from "./Pages/Cart";
 function App() {
   return (
     <>
@@ -14,6 +15,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/shophere" element={<ShopHere />} />
+          <Route path="/cart" element={<Cart />} />
         </Routes>
         <LatestOffer />
         <Footer />
