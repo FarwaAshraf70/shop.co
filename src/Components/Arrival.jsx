@@ -19,6 +19,7 @@ const Arrival = () => {
       title: "T-SHIRT WITH TAPE DETAILS",
       rating: 4.5,
       price: "$120",
+      
     },
     {
       id: 2,
