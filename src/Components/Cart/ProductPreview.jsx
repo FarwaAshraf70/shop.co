@@ -15,7 +15,7 @@ const ProductPreview = () => {
 
       percentDiscount: 40,
 
-      rating: 4.5,
+      // rating: 4.5,
 
       images: [
         "/images/front.png",

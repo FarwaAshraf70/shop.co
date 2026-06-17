@@ -1,79 +1,39 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import ProductCart from "../Components/ProductCart";
-
-import tshirt from "../assets/tshirt.png";
-import skinnyjeans from "../assets/skinnyjeans.png";
-import chekshirt from "../assets/chekshirt.png";
-import orange from "../assets/orange.png";
-
-import vertical from "../assets/vertical.png";
-import courage from "../assets/courage.png";
-import loose from "../assets/loose.png";
-import faded from "../assets/faded.png";
+import { getProducts } from "../api/productApi";
 
 const Arrival = () => {
-  const products = [
-    {
-      id: 1,
-      image: tshirt,
-      title: "T-SHIRT WITH TAPE DETAILS",
-      rating: 4.5,
-      price: "$120",
-      
-    },
-    {
-      id: 2,
-      image: skinnyjeans,
-      title: "SKINNY FIT JEANS",
-      rating: 3.5,
-      price: "$240",
-    },
-    {
-      id: 3,
-      image: chekshirt,
-      title: "CHECKERED SHIRT",
-      rating: 3.5,
-      price: "$240",
-    },
-    {
-      id: 4,
-      image: orange,
-      title: "SLEEVE STRIPED T-SHIRT",
-      rating: 3.5,
-      price: "$240",
-    },
-  ];
+  const [products, setProducts] = useState([]);
+  const [topSelling, setTopSelling] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const navigate = useNavigate();
 
-  const tipselling = [
-    {
-      id: 5,
-      image: vertical,
-      title: "VERTICAL STRIPED SHIRT",
-      rating: 5,
-      price: "$212",
-    },
-    {
-      id: 6,
-      image: courage,
-      title: "COURAGE GRAPHIC T-SHIRT",
-      rating: 4,
-      price: "$145",
-    },
-    {
-      id: 7,
-      image: loose,
-      title: "LOOSE FIT BERMUDA SHORTS",
-      rating: 3,
-      price: "$80",
-    },
-    {
-      id: 8,
-      image: faded,
-      title: "FADED SKINNY JEANS",
-      rating: 4.5,
-      price: "$210",
-    },
-  ];
+  useEffect(() => {
+    const fetchProducts = async () => {
+      try {
+        const data = await getProducts();
+
+        setProducts(Array.isArray(data) ? data.slice(0, 4) : []);
+
+        setTopSelling(
+          Array.isArray(data)
+            ? data.filter((item) => item.bestSeller).slice(0, 4)
+            : [],
+        );
+      } catch (error) {
+        console.log(error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchProducts();
+  }, []);
+
+  if (loading) {
+    return <h2 className="text-center mt-10">Loading...</h2>;
+  }
 
   return (
     <>
@@ -83,7 +43,24 @@ const Arrival = () => {
 
       <div className="grid grid-cols-4 gap-6 mt-[55px] justify-items-center">
         {products.map((item) => (
-          <ProductCart key={item.id} item={item} />
+          <div
+            key={item._id}
+            className="w-[250px] cursor-pointer"
+            onClick={() => navigate(`/shophere/${item._id}`)}
+          >
+            <div className="bg-[#F0F0F0] rounded-[20px] overflow-hidden">
+              <img
+                src={item.image?.[0]}
+                alt={item.name}
+                className="w-full h-[280px] object-contain"
+              />
+            </div>
+            <h3 className="font-bold text-lg mt-3">{item.name}</h3>
+            <div className="flex items-center gap-2">
+              <span>{item.rating} </span>
+            </div>
+            <p className="font-bold text-2xl">${item.price}</p>
+          </div>
         ))}
       </div>
 
@@ -92,8 +69,8 @@ const Arrival = () => {
       </h1>
 
       <div className="grid grid-cols-4 gap-6 mt-[55px] justify-items-center">
-        {tipselling.map((item) => (
-          <ProductCart key={item.id} item={item} />
+        {topSelling.map((item) => (
+          <ProductCart key={item._id} item={item} />
         ))}
       </div>
     </>

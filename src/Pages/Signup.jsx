@@ -3,6 +3,7 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
 const Signup = () => {
+  console.log("SIGNUP FILE LOADED NEW VERSION");
   const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
@@ -22,14 +23,9 @@ const Signup = () => {
     e.preventDefault();
 
     try {
-      const res = await axios.post(
-        "http://localhost:4000/api/v1/users/register", 
-        formData
-      );
+      await axios.post("http://localhost:4000/api/v1/users/register", formData);
 
-      console.log(res.data);
       alert("Registration Successful");
-
       navigate("/login");
     } catch (error) {
       console.log(error.response?.data || error.message);
@@ -38,49 +34,67 @@ const Signup = () => {
   };
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-gray-100">
-      <form
-        onSubmit={handleSubmit}
-        className="bg-white p-8 rounded-lg shadow-md w-96"
-      >
-        <h2 className="text-2xl font-bold mb-6 text-center">
-          Sign Up
-        </h2>
+    <div className="min-h-screen flex items-center justify-center bg-gray-100">
+      <div className="flex bg-white rounded-2xl shadow-2xl overflow-hidden w-[900px] max-w-full">
+        <div className="hidden md:flex w-1/2 bg-black text-white items-center justify-center p-10">
+          <div>
+            <h1 className="text-3xl font-bold mb-3">Welcome!</h1>
+            <p className="text-sm text-gray-300">
+              Create your account and start shopping with us.
+            </p>
+          </div>
+        </div>
 
-        <input
-          type="text"
-          name="username"
-          placeholder="Username"
-          value={formData.username}
-          onChange={handleChange}
-          className="w-full mb-4 p-2 border rounded"
-        />
+        <div className="w-full md:w-1/2 p-10">
+          <h2 className="text-2xl font-bold mb-6 text-center">Sign Up</h2>
 
-        <input
-          type="email"
-          name="email"
-          placeholder="Email"
-          value={formData.email}
-          onChange={handleChange}
-          className="w-full mb-4 p-2 border rounded"
-        />
+          <form onSubmit={handleSubmit} className="space-y-4">
+            <input
+              type="text"
+              name="username"
+              placeholder="Username"
+              value={formData.username}
+              onChange={handleChange}
+              className="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-black"
+            />
 
-        <input
-          type="password"
-          name="password"
-          placeholder="Password"
-          value={formData.password}
-          onChange={handleChange}
-          className="w-full mb-6 p-2 border rounded"
-        />
+            <input
+              type="email"
+              name="email"
+              placeholder="Email"
+              value={formData.email}
+              onChange={handleChange}
+              className="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-black"
+            />
 
-        <button
-          type="submit"
-          className="w-full bg-black text-white py-2 rounded hover:bg-gray-800"
-        >
-          Sign Up
-        </button>
-      </form>
+            <input
+              type="password"
+              name="password"
+              placeholder="Password"
+              value={formData.password}
+              onChange={handleChange}
+              className="w-full p-3 border rounded-lg focus:outline-none focus:ring-2 focus:ring-black"
+            />
+
+            <button
+              type="submit"
+              className="w-full bg-black text-white py-3 rounded-lg hover:bg-gray-800 transition"
+            >
+              Sign Up
+            </button>
+          </form>
+
+          <p className="text-center mt-5 text-sm">
+            Already have an account?{" "}
+            <span
+              onClick={() => navigate("/login")}
+              className="text-yellow-500 cursor-pointer font-semibold"
+            >
+              Login
+            </span>
+          </p>
+        </div>
+      </div>
     </div>
   );
 };

@@ -9,7 +9,7 @@ const MoreCollection = () => {
 
       sellingPrice: 260,
 
-      rating: 4.5,
+      // rating: 4.5,
 
       image: "/images/Frame 32.png",
     },
@@ -42,7 +42,7 @@ const MoreCollection = () => {
 
       sellingPrice: 120,
 
-      rating: 5,
+      // rating: 5,
 
       image: "/images/Frame 35.png",
     },

@@ -43,11 +43,11 @@ const Rating = () => {
                 className="[max-w-[510px] border border-[#0000001A] py-[28px] px-[32px] rounded-[20px] w-full "
               >
                 <div className="flex text-[#FFC633]">
+                  {/* <FaStar />
                   <FaStar />
                   <FaStar />
                   <FaStar />
-                  <FaStar />
-                  <FaStar />
+                  <FaStar /> */}
                 </div>
 
                 <div className="flex items-center gap-[6px] mt-[10px]">
@@ -69,7 +69,6 @@ const Rating = () => {
           </button>
         </div>
       </div>
-    
     </>
   );
 };
