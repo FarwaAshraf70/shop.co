@@ -1,45 +1,96 @@
-import React , {useState} from 'react'
-import { Link } from 'react-router-dom';
-import logo from '../assets/logo.png'
-import { RiArrowDropDownLine } from "react-icons/ri";
+import React, { useEffect, useState } from "react";
+import logo from "../assets/logo.png";
 import { CiSearch } from "react-icons/ci";
-import cart from '../assets/cart.svg'
-import signIn from '../assets/signIn.svg'
-
+import cartimg from "../assets/cartimg.svg";
+import userIcon from "../assets/user.svg";
+import { useNavigate } from "react-router-dom";
+import { useAppContext } from "../context/AppContext";
 
 const Navbar = () => {
-  const [open , setOpen]=useState(false)
+  const [open, setOpen] = useState(false);
+  const { user, setUser, setSearchQuery, searchQuery, getCartCount } =
+    useAppContext();
+  console.log("Navbar Cart Count:", getCartCount());
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+    setUser(null);
+    setOpen(false);
+    navigate("/login");
+  };
+  useEffect(() => {
+    if (searchQuery.length > 0) {
+      navigate("/onsale");
+    }
+  }, [searchQuery]);
+
   return (
     <>
+      <div className="py-[24px]">
+        <nav className="flex justify-center items-center gap-[24px]">
+          <div>
+            <img src={logo} alt="logo" />
+          </div>
 
-<div className=''>
-    <nav className='flex justify-center items-center gap-10 mt-[24px] mx-[100px]'>
-  
-      <img src={logo} alt='' className='max-w-40 h-5'/>
-  
-    <div className=''>
-      <ul className='flex  gap-6'>
-      {/* <li><Link className='font-bold text-[32px] leading-[100%] text-[#000000]'>SHOP.CO</Link></li> */}
-      <li ><Link className='font-normal text-[16px] leading-[100%] '>Shop</Link> </li>
-      <li><Link className='font-normal text-[16px] leading-[100%] '>On Sale<span></span></Link> </li>
-      <li><Link className='font-normal text-[16px] leading-[100%] '>New Arrivals</Link> </li>
-      <li><Link className='font-normal text-[16px] leading-[100%] '>Brands</Link> </li> 
-      </ul>
-    </div>
-    <div className='relative bg-[#F0F0F0] py-3 pl-8.5  rounded-[62px] max-w-144.25 gap-3'>
-      <input type='text' placeholder='Search for products...' className=' placeholder:font-normal placeholder:text-[16px] placeholder:leading-[100%] ' />
-      <CiSearch  className='absolute bottom-3.75 left-1.25 bg-black/400'/>
-    </div>
-    <div className='flex gap-3'>
-      <img src={cart} alt='' className='w-8'/>
-      <img src={signIn} alt='' className='w-8'/>
+          <div>
+            <ul className="flex gap-[24px]">
+              <li>Shop</li>
+              <li>On Sale</li>
+              <li>New Arrival</li>
+              <li>Brands</li>
+              <li>Contact</li>
+            </ul>
+          </div>
+
+          <div className="relative bg-[#F0F0F0] max-w-[577px] rounded-full">
+            <CiSearch className="absolute left-2 top-1/2 -translate-y-1/2 text-gray-500" />
+
+            <input
+              onChange={(e) => setSearchQuery(e.target.value)}
+              type="Search"
+              placeholder="Search for Products"
+              className="placeholder:text-[16px] placeholder:font-[16px] placeholder:leading-[100%] placeholder:text-[#00000066] outline-none py-[14px] pl-[40px]"
+            />
+          </div>
+
+          <div className="flex gap-[14px] relative">
+            <div
+              onClick={() => navigate("/cart")}
+              className="cursor-pointer relative"
+            >
+              <img src={cartimg} alt="cartimg" className="max-w-[24px]" />
+              <button className="absolute -top-2 -right-3 text-xs text-white bg-black w-[18px] h-[18px] rounded-full">
+                {getCartCount()}
+              </button>
+            </div>
+            <img
+              src={userIcon}
+              alt="userIcon"
+              className="max-w-[24px] cursor-pointer"
+              onClick={() => setOpen(!open)}
+            />
+
+            {open && (
+              <div className="absolute top-8 right-0 bg-white shadow-md rounded-md p-3 w-[150px]">
+                <ul className="flex flex-col gap-3">
+                  <li className="cursor-pointer">My Orders</li>
+
+                  <li className="cursor-pointer">Wishlist</li>
+
+                  <li className="cursor-pointer">Your Shop</li>
+
+                  <li className="cursor-pointer" onClick={handleLogout}>
+                    Logout
+                  </li>
+                </ul>
+              </div>
+            )}
+          </div>
+        </nav>
       </div>
-
-    </nav>
- </div>
-    
     </>
-  )
-}
+  );
+};
 
-export default Navbar
+export default Navbar;

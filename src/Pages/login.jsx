@@ -1,31 +1,51 @@
 import { Link, useNavigate } from "react-router-dom";
+import { useState } from "react";
+import { loginUser } from "../api/authApi";
 import cargo from "/images/cargo.webp";
 
 const Login = () => {
   const navigate = useNavigate();
-  const handleLogin = (e) => {
-    e.preventDefault();
-    console.log("login clicked");
-    navigate("/home");
-  };
 
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  // const handleLogin = async (e) => {
+  //   e.preventDefault();
+
+  //   try {
+  //     const data = await loginUser({ email, password });
+
+  //     localStorage.setItem("token", data.token);
+  //     navigate("/home");
+  //   } catch (error) {
+  //     alert(error.response?.data?.message || "Login Failed");
+  //   }
+  // };
+
+  const handleLogin = async (e) => {
+    e.preventDefault();
+
+    try {
+      const data = await loginUser({ email, password });
+
+      localStorage.setItem("token", data.token);
+      localStorage.setItem("role", data.role); // save role
+
+      if (data.role === "admin") {
+        navigate("/admin"); // admin page
+      } else {
+        navigate("/home"); // user page
+      }
+    } catch (error) {
+      alert(error.response?.data?.message || "Login Failed");
+    }
+  };
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100 p-5">
       <div className="bg-white rounded-3xl shadow-lg overflow-hidden flex w-full max-w-5xl">
         {/* Left Side */}
         <div className="hidden md:block w-1/2 relative">
           <img src={cargo} alt="Login" className="w-full h-full object-cover" />
-
-          {/* <div className="absolute bottom-6 left-6 right-6 bg-white rounded-3xl p-6 shadow-lg">
-            <h2 className="text-3xl font-bold text-center">
-              Styles, Brilliant Life Designs
-            </h2>
-
-            <p className="text-gray-500 text-center mt-3">
-              With just a few clicks, you're on your way to discovering your
-              dream style.
-            </p>
-          </div> */}
         </div>
 
         {/* Right Side */}
@@ -43,6 +63,8 @@ const Login = () => {
               <input
                 type="email"
                 placeholder="Enter Email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
                 className="w-full border rounded-full px-4 py-3 mt-2 outline-none"
               />
             </div>
@@ -53,6 +75,8 @@ const Login = () => {
               <input
                 type="password"
                 placeholder="Enter Password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
                 className="w-full border rounded-full px-4 py-3 mt-2 outline-none"
               />
             </div>

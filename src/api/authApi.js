@@ -9,7 +9,7 @@ export const registerUser = async (userData) => {
 
 // Login
 export const loginUser = async (userData) => {
-  const response = await axiosInstance.post("/api/v1/login", userData);
+  const response = await axiosInstance.post("/api/v1/users/login", userData);
 
   return response.data;
 };

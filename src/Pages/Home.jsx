@@ -1,27 +1,29 @@
-import React from 'react'
-import Hero from '../Components/Hero'
-import Brands from '../Components/Brands'
-import Arrival from '../Components/Arrival'
-import Dressing from '../Components/Dressing'
-import CustomersReview from '../Components/CustomersReview'
-import LatestOffer from '../Components/\LatestOffer'
-import Footer from '../Components/\Footer'
-import { Link } from 'react-router-dom'
-import Links from '../Components/Links'
+import React from "react";
+import Hero from "../components/Hero";
+import Brands from "../components/Brands";
+
+import CustomersReview from "../components/CustomersReview";
+import LatestOffer from "../components/LatestOffer";
+// import Footer from "../Components/\Footer";
+import { Link } from "react-router-dom";
+import NewArrival from "../components/NewArrival";
+import BottomBanner from "../components/BottomBanner";
 
 const Home = () => {
   return (
     <>
-    <Hero />
-    <Brands />
-    <Arrival/>
-    <Dressing/>
-    <CustomersReview/>
-    {/* <LatestOffer/> */}
-    {/* <Links/> */}
-   {/* <AddToCart/> */}
-    </>
-  )
-}
+      {/* hero component is banner */}
+      <Hero />
+      <Brands />
+      <NewArrival />
+      <BottomBanner />
+      {/* //arrial means catagories of images */}
+      <CustomersReview />
+      <LatestOffer />
 
-export default Home
+      {/* <AddToCart/> */}
+    </>
+  );
+};
+
+export default Home;

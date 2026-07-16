@@ -1,6 +1,6 @@
 import { useState } from "react";
-import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { registerUser } from "../api/authApi";
 
 const Signup = () => {
   console.log("SIGNUP FILE LOADED NEW VERSION");
@@ -23,7 +23,7 @@ const Signup = () => {
     e.preventDefault();
 
     try {
-      await axios.post("http://localhost:4000/api/v1/users/register", formData);
+      await registerUser(formData);
 
       alert("Registration Successful");
       navigate("/login");
@@ -38,7 +38,7 @@ const Signup = () => {
       <div className="flex bg-white rounded-2xl shadow-2xl overflow-hidden w-[900px] max-w-full">
         <div className="hidden md:flex w-1/2 bg-black text-white items-center justify-center p-10">
           <div>
-            <h1 className="text-3xl font-bold mb-3">Welcome!</h1>
+            <h1 className="text-3xl font-bold mb-3">Welcome To Shop.Co</h1>
             <p className="text-sm text-gray-300">
               Create your account and start shopping with us.
             </p>

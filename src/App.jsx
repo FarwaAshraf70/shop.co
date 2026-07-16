@@ -1,40 +1,49 @@
 import "./App.css";
-import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
-import Home from "./Pages/Home";
+import { Routes, Route, Navigate, useLocation } from "react-router-dom";
+import React from "react";
+
 import Navbar from "./Components/Navbar";
-import ShopHere from "./Pages/ShopHere";
-import Footer from "./Components/Footer";
-import LatestOffer from "./Components/LatestOffer";
+import Home from "./Pages/Home";
+
+// import PopularOutfit from "./Pages/PopularOutfit";
 import Cart from "./Pages/Cart";
 import Login from "./Pages/Login";
 import Signup from "./Pages/Signup";
+import { Toaster } from "react-hot-toast";
+// Layout (YOUR STRUCTURE)
+import MainLayout from "./MainLayout/Layout";
+import Footer from "./components/Footer";
+import OnSale from "./pages/OnSale";
+import ProductDetails from "./pages/ProductDetails";
+
 function App() {
+  const isSellerPath = useLocation().pathname.includes("seller");
+
   return (
-    <>
-      <BrowserRouter>
-        <Navbar />
+    <div>
+      {isSellerPath ? null : <Navbar />}
+      <Toaster />
+      <div className={`${isSellerPath ? "" : ""}`}>
         <Routes>
+          {/* 🔴 PUBLIC ROUTES (NO NAVBAR / FOOTER) */}
           <Route path="/" element={<Navigate to="/login" />} />
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
-          <Route path="/home" element={<Home />} />
-          <Route path="/shophere/:id" element={<ShopHere />} />
-          {/* <Route path="/shophere" element={<ShopHere />} /> */}
-          <Route path="/cart" element={<Cart />} />
+
+          {/* 🟢 MAIN ROUTES (WITH LAYOUT) */}
+          <Route element={<MainLayout />}>
+            <Route path="/home" element={<Home />} />
+            {/* all product */}
+            <Route path="/onsale" element={<OnSale />} />
+            <Route path="/product/:id" element={<ProductDetails />} />
+
+            <Route path="/cart" element={<Cart />} />
+          </Route>
         </Routes>
-        <LatestOffer />
-        <Footer />
-      </BrowserRouter>
-    </>
+        {!isSellerPath && <Footer />}
+      </div>
+    </div>
   );
 }
 
 export default App;
-{
-  /* <Route path="/" element={<Navigate to="/login" />} />
-
-            <Route path="/login" element={<Login />} />
-            <Route path="/register" element={<Register />} />
-
-            <Route path="/home" element={<Home />} /> */
-}
